@@ -189,11 +189,11 @@ client.on("interactionCreate", async (interaction) => {
 				ephemeral: true,
 			});
 			execDeleteApprove();
-		}else{
+		} else {
 			await interaction.editReply({
 				content: `秘密鍵の復元に失敗しました。\nshares count:${Object.keys(approveList).length}`,
 				ephemeral: true,
-			});			
+			});
 		}
 	}
 
@@ -274,7 +274,7 @@ const execApprove = (userid, share) => {
 };
 
 const execDeleteApprove = () => {
-	if(settings.ERASE_SHARE_EVERY_TIME){
+	if (settings.ERASE_SHARE_EVERY_TIME) {
 		approveList = {};
 	}
 };

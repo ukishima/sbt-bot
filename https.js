@@ -9,11 +9,11 @@ const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
 
 const app = express();
 
-const server = app.listen(8080, function() {
+const server = app.listen(8080, function () {
 	console.log(`Node.js is listening to PORT:${server.address().port}`);
 });
 
-app.get("/list", function(req, res, next) {
+app.get("/list", function (req, res, next) {
 	const list = require("./requests");
 	const result = {};
 
