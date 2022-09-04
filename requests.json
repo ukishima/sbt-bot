@@ -1,0 +1,19 @@
+{
+  "488544515976724480": {
+    "username": "ukishima",
+    "address": "0x535B72f4c4370F416348Eb5a9525a408AC8D8aCB",
+    "salt": 1662090248993,
+    "published": false,
+    "signature": "0x7630a93ad4bde80578b457e65fd693c74d0d7683bf9a640ad18a4ed61aa8013b6b87cc90a3bbdfe6240de0537bc8d1aa70df67590a2c4a365ff46149de3473041b",
+    "image": "5",
+    "messageHash": "0xee5ab933044ce17596f33207e221ae3d2f85f8cae8bc5c570cb3739929761b1a"
+  },
+  "937906941257199667": {
+    "username": "自律分散型メイド",
+    "address": "0x5A21E07C07fAf6549Ce8247ba7dd7b1257C0FC4d",
+    "salt": 1661783742097,
+    "published": true,
+    "signature": "0xce47971af1c0603f94d2d8ad18f15589506417e43696d56afaed51dc14e52df10c6d2dcecf7a1790bb2fbad8a29be0c74890d849476b35c06777c05201d356671b",
+    "messageHash": "0x60e0f32fff1ad23e26e2641389a236d06989890f66be1061e2edbb4a995136d6"
+  }
+}

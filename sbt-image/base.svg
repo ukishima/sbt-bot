@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1500" viewBox="0 0 1500 1500">
+  <image href="./sbt-image/wagumi_sbt_base.png" width="1500" height="1500"/>
+  <image href="./sbt-image/wagumi_sbt_card.png" width="1500" height="1500"/>
+  <image href="$icon$" x="318" y="830" width="180" height="180" transform="rotate(343,408,930)"/>
+  
+  <text x="300" y="1250" font-size="96" transform="rotate(342,150,700)">$username$</text>
+</svg>
