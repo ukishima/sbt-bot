@@ -1,139 +1,39 @@
 [
-  {
-    "type": 1,
-    "components": [
-      {
-        "type": 3,
-        "custom_id": "firstOption",
-        "placeholder": "Nothing selected",
-        "options": [
-          {
-            "label": "Select me",
-            "value": "1",
-            "description": "This is a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "2",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "3",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "4",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "5",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "6",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "7",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "8",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "9",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "10",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "11",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "12",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "13",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "14",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "15",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "16",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "17",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "18",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "19",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "20",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "21",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "22",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "23",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "24",
-            "description": "This is also a description"
-          },
-          {
-            "label": "You can select me too",
-            "value": "25",
-            "description": "This is also a description"
-          }
-        ]
-      }
-    ]
-  }
+    {
+      "type": 1,
+      "components": [
+        {
+          "type": 3,
+          "custom_id": "firstOption",
+          "placeholder": "選択してください",     
+          "options": [
+            {
+              "label": "Default",
+              "value": "Default",
+              "description": "標準のイメージです。"
+            },
+            {
+              "label": "Cute",  
+              "value": "Cute",
+              "description": "かわいらしさを追求したイメージです。"
+            },
+            {
+              "label": "Cool",  
+              "value": "Cool",
+              "description": "かっこよさを追求したイメージです。"
+            },
+            {
+              "label": "Ninjya",  
+              "value": "Ninjya",
+              "description": "変化球です"
+            },
+            {
+              "label": "MakeMoney",  
+              "value": "MakeMoney",
+              "description": "世の中金だという方にお勧めです。"
+            }
+          ]
+        }
+      ]
+    }
 ]

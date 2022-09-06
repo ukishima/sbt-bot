@@ -9,11 +9,11 @@ const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
 
 const app = express();
 
-const server = app.listen(8080, function () {
+const server = app.listen(8080, function() {
 	console.log(`Node.js is listening to PORT:${server.address().port}`);
 });
 
-app.get("/list", function (req, res, next) {
+app.get("/list", function(req, res, next) {
 	const list = require("./requests");
 	const result = {};
 
@@ -33,10 +33,30 @@ app.get("/image", async (req, res, next) => {
 	} else {
 		const result = await getMember(req.query.userid);
 		if (result) {
+			const requests = require("./requests.json");
+			let baseImage;
+			switch (requests.image) {
+				case "Cute":
+					baseImage = "./sbt-image/wagumi_sbt_base_cute.png";
+					break;
+				case "Cool":
+					baseImage = "./sbt-image/wagumi_sbt_base_cool.png";
+					break;
+				case "Ninjya":
+					baseImage = "./sbt-image/wagumi_sbt_base_ninjya.png";
+					break;
+				case "MakeMoney":
+					baseImage = "./sbt-image/wagumi_sbt_base_makemoney.png";
+					break;
+				default:
+					baseImage = "./sbt-image/wagumi_sbt_base_dafault.png";
+			}
+
 			pngData = await sbtImage.createSBTImage(
 				req.query.userid,
 				result.username,
 				result.avatar,
+				baseImage
 			);
 		} else {
 			pngData = fs.readFileSync("./sbt-image/no-image.png");
@@ -62,7 +82,7 @@ const getMember = async (userid) => {
 		} else {
 			icon = "https://discord.com/assets/f9bb9c4af2b9c32a2c5ee0014661546d.png";
 		}
-		return { username: result.user.username, avatar: icon };
+		return { username: result.nick??result.user.username, avatar: icon };
 	} catch (e) {
 		return null;
 	}

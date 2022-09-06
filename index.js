@@ -38,8 +38,8 @@ client.on("interactionCreate", async (interaction) => {
 	if (
 		!(
 			interaction.isChatInputCommand() ||
-				interaction.isModalSubmit() ||
-				interaction.isSelectMenu()
+			interaction.isModalSubmit() ||
+			interaction.isSelectMenu()
 		)
 	) {
 		return;
@@ -68,7 +68,6 @@ client.on("interactionCreate", async (interaction) => {
 			});
 			return;
 		}
-		console.log(members);
 
 		const isCreate = interaction.options.getBoolean("create") ?? false;
 		let specifiedPrivateKey;
@@ -78,7 +77,7 @@ client.on("interactionCreate", async (interaction) => {
 			specifiedPrivateKey = await getPrivateKey(settings.USEENCRYPTION);
 			if (specifiedPrivateKey === "") {
 				await interaction.reply({
-					content: "Init:update failed",
+					content: "Shareを再生成しようとしましたが秘密鍵の復元に失敗しました。",
 					ephemeral: true,
 				});
 				return;
@@ -94,8 +93,17 @@ client.on("interactionCreate", async (interaction) => {
 
 		let i = 0;
 		role.members.forEach((user) => {
-			user.send(shares[i]);
-			i++;
+			try{
+				user.send(shares[i]);
+				i++				
+			}catch{
+				interaction.editReply({
+					content: `シェアのDM送信中にエラーが発生しました。\nuser:${user.id}`,
+					ephemeral: true,
+				});
+				execDeleteApprove();
+				return;
+			}
 		});
 		await interaction.editReply({
 			content: `初期化されました\nshareOwners:${members}\nthreshold:${threshold}\nvalidator:${settings.VALIDATOR}`,
@@ -143,7 +151,8 @@ client.on("interactionCreate", async (interaction) => {
 			return;
 		}
 
-		execRegist(interaction.user.id, interaction.user.username, address);
+		console.log(interaction.member.nickname,interaction.member.nick);
+		execRegist(interaction.user.id, interaction.member.nick??interaction.user.username, address);
 		await interaction.reply({
 			content: `${address}で登録されました。`,
 			ephemeral: true,
@@ -174,6 +183,7 @@ client.on("interactionCreate", async (interaction) => {
 		}
 	}
 
+
 	if (interaction.commandName === "mint") {
 		const url = execMint(interaction.user.id);
 		await interaction.reply({ content: url, ephemeral: true });
@@ -185,22 +195,22 @@ client.on("interactionCreate", async (interaction) => {
 		if (privateKey !== "") {
 			await execSign(privateKey);
 			await interaction.editReply({
-				content: `singed:${settings.VALIDATOR}`,
+				content: `署名を行いました。\nvalidator:${settings.VALIDATOR}`,
 				ephemeral: true,
 			});
 			execDeleteApprove();
-		} else {
+		}else{
 			await interaction.editReply({
 				content: `秘密鍵の復元に失敗しました。\nshares count:${Object.keys(approveList).length}`,
 				ephemeral: true,
-			});
+			});			
 		}
 	}
 
 	if (interaction.commandName === "delete_approvals") {
 		execDeleteApprove();
 		await interaction.reply({
-			content: "delete approval",
+			content: `受信済みシェアを削除しました。\nshares count:${Object.keys(approveList).length}`,
 			ephemeral: true,
 		});
 	}
@@ -220,12 +230,20 @@ client.on("interactionCreate", async (interaction) => {
 	if (interaction.customId === "firstOption") {
 		const selected = interaction.values[0];
 		const requests = require("./requests.json");
-		requests[interaction.user.id].image = selected;
-		fs.writeFileSync("./requests.json", JSON.stringify(requests, null, 2));
-		await interaction.update({
-			content: `${selected} was selected!`,
-			components: [],
-		});
+		if (requests[interaction.user.id]) {
+			requests[interaction.user.id].image = selected;
+			fs.writeFileSync("./requests.json", JSON.stringify(requests, null, 2));
+			await interaction.update({
+				content: `${selected} が選択されました。`,
+				components: [],
+			});
+		}
+		else {
+			await interaction.update({
+				content: `申請を先に行ってください。`,
+				components: [],
+			})
+		}
 	}
 });
 
@@ -301,7 +319,7 @@ const execRegist = (userid, username, address) => {
 	let requests = {};
 	try {
 		requests = JSON.parse(fs.readFileSync(filePath));
-	} catch (e) {}
+	} catch (e) { }
 
 	requests[userid] = {};
 	requests[userid].username = username;
@@ -369,13 +387,13 @@ const execMint = (discordId) => {
 	}
 	if (requests[discordId]) {
 		if (requests[discordId].signature !== "") {
-			const owner = requests[discordId].address;
+			const address = requests[discordId].address;
 			const userid = discordId;
 			const username = requests[discordId].username;
 			const salt = requests[discordId].salt;
 			const signature = requests[discordId].signature;
 			requests[userid].published = true;
-			return `https://ukishima.github.io/metadata/?owner=${owner}&userid=${userid}&username=${username}&salt=${salt}&signature=${signature}`;
+			return `https://wagumi.github.io/sbt/mint/?address=${address}&userid=${userid}&username=${username}&salt=${salt}&signature=${signature}`;
 		}
 		return "あなたのSBTは承認待ちです。しばらくお待ちください。";
 	}
